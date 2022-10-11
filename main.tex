@@ -138,18 +138,18 @@ Our goal is to given a direct decomposition of $V$, the ambient space, into a ra
 The lattice $\Lambda$ determines the subspace $L$ and is sufficient input for the problem. Setting $L  =\text{span}_\R(\Lambda)$, this holds because $L$ is assumed to be a rational vector space, we need $L\cap \Lambda$ to be full rank in $L$ which means that $\Lambda$ has the dimension of $L$ basis vectors and hence also spans $L$. The dimension of the ambient vector space can be determined by the input data.  Therefore only a lattice is needed as data to the problem. \nl 
 
 \textbf{Process Outline:}\nl
-\textbf{Step 1.} The user gives data (a lattice $\Lambda$) to the function.  Either as a basis of a lattice or arising from as the integer kernel from a linear system, $\Lambda = \{x\in \Z^n: Ax=0\}$ for some $m\times n$ matrix $A$. \nl %%double check your dimensions here, I htink $n$ is right from checking. 
+\textbf{Step 1.} The user gives data (a lattice $\Lambda$) to the function.  Either as a basis of a lattice or arising from as the integer kernel from a linear system, $\Lambda = \{x\in \Z^n: Ax=0\}$ for some $m\times n$ matrix $A$. \nl 
 \indent \textit{Processing data}\nl 
 When processing the data, we wish to accept two forms of data of the problem. The first form is a lattice basis form and the second is a matrix form. The lattice basis or matrix form comes in two flavors; a integral (rational) form and a mixed integer case. \nl 
 \indent \textit{Case 1a:} The lattice is specified by a collection of $N$ rational vectors $B= \{b_1,...,b_N\}$ in the lattice with the possibility of $N\geq m$. One can compute the Hermite Normal Form of $B =(b_1,...,b_N)$ to give a basis of the lattice.\nl
 \indent \textit{Case 1b:} The lattice is specified by a collection of $N$ vectors $B= \{b_1,...,b_N\}$ in the lattice with the possibility of $N\geq m$. {\color{red} We will show that this is a special case of case 2.}\nl 
-%One can compute the Hermite Normal of the matrix $B =(b_1,...,b_N)$ to give a basis of the lattice as in Theorem \ref{LatticeBasis}. \nl 
-\indent \textit{Case 2:} The lattice is specified by as the integer kernel from a linear system of equations i.e. $\Lambda = \{x\in \Z^n: Ax=0\}$ for some $m\times n$ matrix $A$.% {\color{red} Here I'm not assuming that $A$ is integral, some more processing needs to be done with the data.} 
-Depending on the smallest subfield of $\R$ that the entereis in $A$ are, there are different approaches for finding a lattice basis here. \nl  %{\color{red} The columns of $A$ that are rational say $A' = (r_1,r_2,...,r_N)$ can be used in conjunction with  Theorem \ref{LatticeBasis} to compute a basis of $\Lambda$. }\nl 
+
+\indent \textit{Case 2:} The lattice is specified by as the integer kernel from a linear system of equations i.e. $\Lambda = \{x\in \Z^n: Ax=0\}$ for some $m\times n$ matrix $A$.
+Depending on the smallest subfield of $\R$ that the entereis in $A$ are, there are different approaches for finding a lattice basis here. \nl  
 {\color{red} \indent \textit{Case 3:} The lattice is specified as integer kernel of the affine hull of a polytope. Since the affine hull of a polytope is given by it's equations being 0, we can reduce this case to case 2. }\nl 
 
 Now we can assume we have a basis $B= \{b_1,...,b_k\}$ of the rational space $L = \text{span}_\R(\Lambda)$ with $\Lambda = \La(B)$. \nl 
-\textbf{Step 2.} Complete a basis of $V$. That is find a basis of $M\cong V/L$ say $b_{k+1},..., b_{m}$ with the vectors having user specified properties. The user can chose the basis to be arbitrary, orthogonal, orthonormal to with respect to each other, $L$, or $\Lambda$ as appropriate.  % , the projected lattice. {\color{red} does this need to be the projected lattice?, no inherently the lattice does not need to be full ran}{\color{blue}, $b_{k+1},..., b_{m}$ such that these vectors are arbitrary/orthogonal/orthonormal to $\Lambda$. 
+\textbf{Step 2.} Complete a basis of $V$. That is find a basis of $M\cong V/L$ say $b_{k+1},..., b_{m}$ with the vectors having user specified properties. The user can chose the basis to be arbitrary, orthogonal, orthonormal to with respect to each other, $L$, or $\Lambda$ as appropriate.  
 \nl 
 \textbf{Step 3.} Define the map $T$ as $T = (b_1,...,b_k,b_{k+1},...b_m)$. Return this as a matrix.  \nl 
 
@@ -157,8 +157,8 @@ Now we can assume we have a basis $B= \{b_1,...,b_k\}$ of the rational space $L 
 
 
 \section{Computing Cases 1b/2/3 in step 1}
-\subsection{Compuitng $\ker_\Z(A)$ for $A$ with rational enteries}
-%In this section, we give some tools for computing lattice basis.  %as would be necessary by Case 2 and 3. 
+\subsection{Computing $\ker_\Z(A)$ for $A$ with rational entries}
+
 \begin{defn}
 A unimodular matrix $U$ is a square matrix with integer entries and $\det(U)=\pm 1$. %(I.e $U\in GL_n(\Z)$) 
 \end{defn}
@@ -210,15 +210,10 @@ Let $A:\R^m \to \R^n$ be an integral linear transformation. $\ker_\Z(A) \cap \La
 We can commute the dual basis of $\ker_Z(A)$ and $\Lambda$. Let $B$ be the lattice basis of $\ker_\Z(A)$ and $B'$ be the lattice basis of $\Lambda$ with dual basis $C$ and $C'$ respectively.   The lattices of $\La(B)$ and $\La(B')$, then the dual of $\La(B)\cap \La(B')$ is $\La([C|C'])$. This can be checked by a similar argument to Theorem \ref{DualLattice}. Then basis for $\La(B)\cap \La(B')$ can be computed via Theorem \ref{LatticeBasis} using the matrix $[C|C']$ and taking the dual of that. 
 \end{proof}
 
-%Given the possibility of mixed input with respect to Step 1, case 2 with columns being irrational with respect to the lattice $\{x\in \Z^n:Ax=0\}$ we need to know how to identify the columns of $A$ that are rational with respect to the lattice. 
+
 
 \subsection{Computing $\ker_\Z(A)$ for $A$ with algebraic entries}
-% \begin{ex}
-% Let $A = \begin{bmatrix}1 & \sqrt{2}\end{bmatrix}\in \R^{1\times 2}$. Then $\ker_\Z(A)=\{0\}.$\end{ex}
-% \begin{proof}
-%  First, $\ker_\R(A) = span\{(-\sqrt{2},1)^T\}$. There is no $n\in \Z\setminus\{0\}$ such that $ n\sqrt{2}\in \Z$. % We seak to find a vector $y\in \Z^2$ such that $y^Tx =0$ for all $x\in \ker_\Z(A)$. As notation though out, $x = (x_1,x_2)^T$. 
-% Consider $y^Tx=0$ where $x\in \ker_\Z(A)$. Then $x = \begin{bmatrix} a_1\\a_2\end{bmatrix}+\begin{bmatrix}b_1\\b_2 \end{bmatrix}\sqrt{2} =\begin{bmatrix}a_1 & b_1 \\ a_2&b_2\end{bmatrix}\begin{bmatrix} 1\\ \sqrt{2}\end{bmatrix} $. $y = \begin{bmatrix} y_1\\ y_2\end{bmatrix} +\begin{bmatrix} 0\\ 0\end{bmatrix}\sqrt{2}$, we need $y^Tx = 0$, so $\begin{bmatrix} 1& \sqrt{2}\end{bmatrix} \begin{bmatrix}y_1&y_2\\0 & 0\end{bmatrix}\begin{bmatrix}a_1 & b_1 \\ a_2&b_2\end{bmatrix}\begin{bmatrix} 1\\ \sqrt{2}\end{bmatrix} $
-% \end{proof}
+
 \begin{ex}\label{DimDiff}
 Let $A = \begin{bmatrix}1+\sqrt{2} & 0 & 1+\sqrt{2} & \sqrt{3} \\ 0 & 1 & -1 &1\end{bmatrix}$. Then $\ker_\Z(A) = \left\{n\begin{pmatrix} 1\\ -1\\ 1\\ 0\end{pmatrix}: n\in \Z\right\}$. 
 \end{ex}
@@ -229,13 +224,13 @@ First, $\Q(\sqrt{2},\sqrt{3})\subset \R$ is a  4 dimensional $\Q$ vector space w
     \begin{pmatrix}1&0&1&0\\1&1&-1&1\\0&0&1&0\\0&0&0&0\end{pmatrix} x =\begin{pmatrix}0\\0\\0\\0\end{pmatrix} . 
 \end{align} A similar matrix equation holds for the other equation seeing that \begin{equation}\begin{pmatrix}0&1&-1&1\\0&0&0&0\\1&0&0&0\\0&0&0&0\end{pmatrix} x =\begin{pmatrix}0\\0\\0\\0\end{pmatrix}. \end{equation} As the $x$ vector is the same in both cases we can write this as a single matrix equation \begin{equation}\label{Ex2}
     \begin{pmatrix}1&0&1&0\\1&1&-1&1\\0&0&1&0\\0&0&0&0\\0&1&-1&1\\0&0&0&0\\0&0&0&0\\0&0&0&0\end{pmatrix} x=\begin{pmatrix}0\\0\\0\\0\\0\\0\\0\\0\end{pmatrix}. 
-\end{equation} %we have that %Then $A\in \R^{2\times 4}$ is
+\end{equation} 
 So solving $Ax=0$ for $x\in \Q^4$ is equivalent to solving the equation in line (\ref{Ex2}). This can be done with any method to solve matrix equations over a field. Take for instance Gram-Schmidt or LU-Factorization. Solving this matrix equation, we conclude that $x\in \text{span}\left\{\begin{pmatrix} 1\\ -1\\ 1\\ 0\end{pmatrix}\right\} $ in $\Q^4$. Picking $x$ such that $x\in \Z^4$, we arrive at the desired conclusion. 
 \end{proof}
 \begin{thm}\label{AlgebraicEnteries}
 Suppose that $A$ is an $m\times n$ matrix each entry being algebraic over $\Q$. \textcolor{blue}{Then $\ker_\Z(A)$ can be computed by an equivalent rational matrix problem. }
-\end{thm}%Adding definitions might solve this, as more uses are found it should sort itself out.
-\begin{proof} %avoid \vec notation, danger, assoicated with lower div math. 
+\end{thm}
+\begin{proof} 
 We have that $\{x\in \Z^n : Ax = 0\} \subset \{x\in \Q^n : Ax =0\}$. There is an $a\in \Z$ such that for any  $x\in \Q^n$, $ax \in \Z^n$. Therefore if $x\in \Q^n$ and $Ax =0$, then $ax\in Z^n$ and $A(ax) = 0$. So computing $\ker_\Q(A)$ gives $\ker_\Z(A)$ too. 
 
 Next, all the entries $a_{ij}$ of $A$ are algebraic over $\Q$, there is a polynomial such that $p(x)$ such that $p(\alpha_{ij}) \in \Q$. Let $m(x)$ be the minimal polynomial such that if $\alpha$ is a root of $p(x)$ then $\alpha$ is a root of $m(x)$. Then let $\Q(\alpha)$ be the splitting field of $m(x)$. This is a field extension of $\Q$ of degree $d$ where $d$ is the degree $m(x)$. Such a field extension of $\Q$ is a $d$ dimensional $\Q$ vector space with basis  $\vec{\alpha}^T = (1,\alpha_1,...,\alpha_{d-1})$ where $\alpha_i$ are the distinct roots of $m(x)$. Then for $y\in \Q(\alpha)$, we have $y =\vec{\alpha}^T \begin{pmatrix}
@@ -248,8 +243,6 @@ Now computing $Ax =0$ for $x\in \Q^n$. For $1\leq i\leq m$, $Ax=0$ implies \begi
 \end{pmatrix}$ with $x\in \Q^n$ gives a solution to the original problem of $Ax = 0$ with $x\in\Z^n$. The problem  $\hat A x = 0$ can be solved by any number of matrix solving algorithms. Therefore finding $\ker_\Q(\vec{A})$ gives $\ker_\Z(A).$
 
 
-
-%that $m(a_{ij}) \in \Q$ for all entries $a_{ij}$ of $A.$ There is an algebraic extension of $\Q$ with degree $d$ such that all elements of $A$ are contained in this extension. This can be found by   Let $\Q(\alpha)$ be such extension. It has basis elements $1,\alpha_1,\alpha_2,..., \alpha_d$
 \end{proof}
 \textcolor{blue}{From 11.10.2022, I will worry about making the statement of Theorem \ref{AlgebraicEnteries} precise later.}
 
@@ -283,19 +276,12 @@ We can see that the basis are the same by a quick computation. $\tilde{\Lambda} 
 \end{proof}
 
 
-% In the context of $\Z$ modules,  a lattice is an $\Z$ module. The algebraic dual of a $\Z$ module $M$ is the space of all linear functional (module homomoprhisms) $\phi: M \to \Z$. 
+
 \subsection{$\Z$-modules and Linear Algebra}
 \subsection{Commutative Algebra and Field Extensions of $\Q$}
 \subsection{Number Theory}
 \subsection{Topology}
 \subsection{Analysis}
-%That is $y^T$ is in the dual lattice (dual space is wrong, but maybe this isn't a lattice  exaclty as per out discussion on 9/30). We can use an equivlant formulation of $\ker_\Z(A)$ to enforce integrality constraints on $A$ by defining $\hat A = \begin{bmatrix} A\\ I_2\end{bmatrix}$. It happens that $x\in \ker_\Z(A)$ if and only if $\hat A x =  \begin{bmatrix} 0\\ x_1\\x_2\end{bmatrix}$. We can rewrite dual problem as at $z\in\Z^3$ such that $z^T \hat A x\in \Z$. If we can find $z^T$ such that $ z^T\hat A \neq 0$ and $z^T\hat A x=0$ for all $x\in \ker_\Z(A)$, we will have found a dense direction (I think).\nl 
 
-
-% We will work  in $\Q(\sqrt{2})$ viewing it as a 2 dimensional $\Q$ vector space, i.e. $a+b\sqrt{2} = \begin{pmatrix}a&b\end{pmatrix} \begin{pmatrix}1\\ \sqrt{2}\end{pmatrix}$. Computing the kernel of $\hat A$ in $\Q(\sqrt{2})$ over $\Q$, we have $\hat A x = \begin{bmatrix}1 &0 &0&1\\ 1 & 0 & 0&0 \\ 0 &0&1&0\end{bmatrix}\begin{bmatrix}a_1\\b_1\\a_2\\b_2\end{bmatrix}$ where $a_1+b_1\sqrt{2}= x_1$ and $a_2+b_2\sqrt{2}= x_2$. We find that  $a_1 = -b_2$, $a_1=0 =a_2$ and $b_2$ is a free variables (and ratiaonal). Because  $x$ is integaral, $b_1=0$.  so the kernel is spanned by $\begin{bmatrix}-\lambda \\ b_1 \\ a_2\\ \lambda \end{bmatrix}$ where $\lambda$ is some scalar. Computing $z^T\hat Ax$, $\begin{pmatrix}z_1+z_2 &0 & z_3 &z_1\\ 0 &0 &0&0\end{pmatrix}\begin{bmatrix}-\lambda \\ b_1 \\ a_2\\ \lambda \end{bmatrix} $
-
-
- %Writing $z^T$ in the $\Q$ vector space, $z_1 = z_1 + 0 \sqrt{2}$ ect, $z^T = \begin{bmatrix}z_1 &z_2&z_3\\ 0&0&0 \end{bmatrix}$
-%\section{Number Theory}
 
 \end{document}
