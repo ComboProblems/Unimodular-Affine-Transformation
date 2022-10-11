@@ -1,0 +1,301 @@
+\documentclass{article}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,mathabx,biblatex}
+\usepackage{tikz-cd}
+\usepackage{geometry}
+\geometry{ margin=1.25in}
+\linespread{1.2}
+\renewcommand\qedsymbol{$\blacksquare$}
+%-----------------------------------------------------------------------------------------
+%-------AESTHETIC CHANGES:
+\newcommand{\nl}{\bigskip \\ } %New Line with space. 
+  \renewcommand{\leq}{\leqslant}
+  \renewcommand{\geq}{\geqslant}
+%-----------------------------------------------------------------------------------------
+%-------ABBREVIATIONS:
+  \newcommand{\es}[0]{\emptyset}		%  empty set.
+  \newcommand{\se}[0]{\subseteq}		%  subset or equal.
+  \newcommand{\ps}[0]{\subset}			%  proper subset.
+%-----------------------------------------------------------------------------------------
+%-------SETS OF NUMBERS:
+  \newcommand{\N}[0]{\mathbb{N}}		%  Natural ##s
+  \newcommand{\Z}[0]{\mathbb{Z}}		%  Integer ##s
+  \newcommand{\Q}[0]{\mathbb{Q}}		%  Rational ##s
+  \newcommand{\R}[0]{\mathbb{R}}		%  Real ##s
+  \newcommand{\ER}[0]{\overline{\mathbb{R}}}	%  Extended Real ##s
+  \newcommand{\C}[0]{\mathbb{C}}		%  Complex ##s
+  \newcommand{\EC}[0]{\overline{\mathbb{C}}}	%  Extended Complex ##s
+  \newcommand{\SP}[0]{\mathbb{S}}		%  Sphere
+  \newcommand{\So}[0]{\SP^1}			%  1-Sphere
+  \newcommand{\Sm}[0]{\mathcal S}
+  \newcommand{\La}[0]{\mathcal L}
+  \newcommand{\im}[0]{\text{im}}
+%-----------------------------------------------------------------------------------------
+%-------LOGICAL STATEMENTS:
+  \newcommand{\fa}[1]{\(\forall\,#1\,\)}	%  for all ...
+  \newcommand{\te}[1]{\(\exists\,#1\,\)}	%  there exists	...
+  \newcommand{\then}[0]{\Longrightarrow}	%  then ...
+%  \newcommand{\iff}[0]{\Longleftrightarrow}	%  if and only if ...
+%-----------------------------------------------------------------------------------------
+
+\newcommand{\gen}[1]{\langle #1 \rangle} %brackeded generator 
+  \newcommand{\abs}[1]{\left\lvert#1\right\rvert}	%  Absolute Value |.|
+  \newcommand{\abst}[1]{\lvert#1\rvert}			%  Absolute Value (text)
+  \newcommand{\norm}[1]{\left\|#1\right\|}		%  Norm ||.||
+  \newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}	%  Inner Product <.,.>
+  \newcommand{\ipt}[2]{\langle#1,#2\rangle}		%  Inner Product (text)
+  \newcommand{\ipn}[1]{\left\langle#1,#1\right\rangle}  %  Inner Product Norm
+  \newcommand{\de}[2]{\frac{d#1}{d#2}}			%  Diff.
+  \newcommand{\nde}[3]{\frac{d^{#3}#1}{d#2^{#3}}} 
+	%  nth order diff.
+  \newcommand{\der}[1]{\frac{d}{d#1}}			%  Der.
+  \newcommand{\des}[2]{\frac{d^2#1}{d#2^2}}		%  2nd order diff.
+  \newcommand{\pde}[2]{\frac{\partial#1}{\partial#2}}	%  p. diff.
+  \newcommand{\pdes}[2]{\frac{\partial^2#1}{\partial#2^2}}  %  2nd Order P. Diff.
+  \newcommand{\npde}[3]{\frac{\partial^{#3}#1}{\partial#2^{#3}}}  %  nth Order P. Diff.
+  \newcommand{\tpde}[3]{\frac{\partial^2#1}{\partial#2\,\partial#3}}  %  2* P.Der.
+  \newcommand{\pder}[1]{\pde{}{#1}}			%  Partial Derivative
+  \newcommand{\pders}[1]{\pdes{}{#1}}			%  Partial Derivative
+  \newcommand{\tpder}[2]{\tpde{}{#1}{#2}}		%  2* Partial Derivative
+  \newcommand{\defct}[3]{#1:#2\rightarrow#3}		%  Function Definition
+% A couple of notes on these definitions, those with a `t' appended to
+% the end are intended for use in the short math expression environments
+% they get rid of the enlarging of the delimiters and make everything
+% nice and compact.
+%	DOCUMENT SPECIFIC NOTATION:
+\newcommand{\T}{\mathcal T}		%  Tangential unit vector
+  \newcommand{\B}[0]{\hat{B}}		%  Torsional unit vector
+  \newcommand{\e}[1]{\hat{e}_{#1}}
+  \newcommand{\X}[0]{\mathcal{X}}
+  \newcommand{\y}[0]{\mathcal{y}}
+    \newcommand{\per}[1]{\left(#1\right)}
+  \newcommand{\D}[0]{\mathrm{D}}
+  \newcommand{\LL}[0]{\mathrm{L}}
+%	FORMATING:
+%  \renewcommand{\qedsymbol}{\(\bigstar\)}	%  Cuter Q.E.D.
+  \renewcommand{\labelenumi}{(\roman{enumi})}	%  Roman numberals good
+    \newtheorem{thm}{Theorem}[section]
+    \newtheorem{lem}[thm]{Lemma}
+    \newtheorem{cor}[thm]{Corollary}
+    \newtheorem{prop}[thm]{Proposition}
+    \newtheorem{ex}[thm]{Example}
+    \newtheorem{conj}[thm]{Conjecture}
+  \theoremstyle{definition}
+    \newtheorem{defn}[thm]{Definition}
+    \newtheorem*{T0}{\(T_0\) Axiom}
+    \newtheorem*{T1}{\(T_1\) Axiom}
+    \newtheorem*{T2}{\(T_2\) Axiom}
+    \newtheorem*{T3}{\(T_3\) Axiom}
+    \newtheorem*{T35}{\(T_{3\frac{1}{2}}\) Axiom}
+    \newtheorem*{T4}{\(T_4\) Axiom}
+  \theoremstyle{remark}
+    \newtheorem{rem}[thm]{Remark}
+  \newcommand{\rlem}[1]{Lemma~\ref{#1}}
+  \newcommand{\rlems}[2]{Lemmas~\ref{#1} \& \ref{#2}}
+  \newcommand{\rrem}[1]{Remark~\ref{#1}}
+  \newcommand{\rprop}[1]{Proposition~\ref{#1}}
+  \newcommand{\rprops}[2]{Propositions~\ref{#1} \& \ref{#2}}
+  \newcommand{\rthm}[1]{Theorem~\ref{#1}}
+  \newcommand{\rdef}[1]{Definition~\ref{#1}}
+  \newcommand{\refig}[1]{Figure~\ref{#1}}
+  \newcommand{\rfig}[1]{Figure~\ref{#1}}
+  \newcommand{\rcor}[1]{Corollary~\ref{#1}}
+  \newcommand{\requ}[1]{Equation~\ref{#1}}
+  \newcommand{\rpage}[1]{p.~\pageref{#1}}
+\newcommand{\tensor}{\otimes}
+%	MISC.:
+  \newcommand{\topol}[0]{\mathcal{T}}
+
+%	MEASURE THEORIC NOTATIONS:
+  \newcommand{\sig}[1]{\(\sigma\)-#1}			% sigma-...
+  \newcommand{\co}[0]{\mathcal{E}}			% arbitrary class of sets.
+  \newcommand{\ri}[0]{\mathcal{R}}			% arbitrary ring.
+  \newcommand{\sr}[0]{\mathcal{S}}			% arbitrary sigma ring.
+  \newcommand{\sa}[0]{\mathfrak{M}}			% arbitrary sigma algebra.
+  \newcommand{\hc}[0]{\mathcal{H}}			% arbitrary hereditary class.
+  \newcommand{\di}[2]{\int#1\,d#2}			% integral of 1 wrt 2.
+  \newcommand{\io}[3]{\int_#1#2\,d#3}			% integral of 2 wrt 3 over 1.
+%  \usepackage{quiver}
+ \addbibresource{ref.bib}
+
+\title{Unimodular Affine Transformation}
+\author{Acadia Larsen}
+\begin{document}
+\maketitle
+\textcolor{red}{Text in red is questions/things i'm not sure about}\nl 
+\textcolor{blue}{text in blue is things I am going to change and have written for my own edification.}
+\section{Preliminaries for Lattices and Rational Vector Spaces }
+Though out, let $V$ be a $m$ dimensional real vector space. 
+ \begin{defn}
+ 
+A \textbf{lattice} $\Lambda$ is a subset of $\R^m$ which is an additive Abelian subgroup under standard vector addition with the condition there are $k$ linearly independent vectors $b_1,...,b_k$ where $\Lambda = \left\{\sum\limits_{i=1}^k \lambda_i b_i : \lambda_i \in \Z\right\}$. The vectors $b_1,...,b_k$ for a basis for the lattice. 
+ \end{defn}
+ When the number of basis vectors of a lattice is the same as the dimension of the ambient space $V$, we say that the lattice $\Lambda$ is full rank in $V$.  We write $\Lambda = \La(B)$ to denote a lattice with a basis $B = \{b_1,...,b_n\}$. A lattice is topologically discrete meaning that it has the finest topology which in which singletons are opens sets. 
+
+A \textbf{rational vector space} $V$ of dimension $m$ is a finite dimensional real vector space with a lattice denoted by $\Lambda$ where $\Lambda$ is full rank in $V$. An element $v\in V$ is called \textbf{rational} if $nv\in \Lambda$ for $n\in \Z^+$. We say a subspace $L$ of $V$ is called \textbf{rational} if $L\cap \Lambda$ is a full rank lattice in $L$. The image of $\Lambda$ in $V /L$ is called the \textbf{projected lattice}.\cite{Baldoni_2012} \nl 
+
+Our goal is to given a direct decomposition of $V$, the ambient space, into a rational vector space $L$ with lattice $\Lambda$ with a direct sum complement $M$, find an affine transformation that is lattice preserving for $L$ and, depending on other options, arbitrary/orthogonal/orthonormal for $M$. In this context, $L$, $\Lambda$, and $V$ are data of the problem.  \nl 
+
+The lattice $\Lambda$ determines the subspace $L$ and is sufficient input for the problem. Setting $L  =\text{span}_\R(\Lambda)$, this holds because $L$ is assumed to be a rational vector space, we need $L\cap \Lambda$ to be full rank in $L$ which means that $\Lambda$ has the dimension of $L$ basis vectors and hence also spans $L$. The dimension of the ambient vector space can be determined by the input data.  Therefore only a lattice is needed as data to the problem. \nl 
+
+\textbf{Process Outline:}\nl
+\textbf{Step 1.} The user gives data (a lattice $\Lambda$) to the function.  Either as a basis of a lattice or arising from as the integer kernel from a linear system, $\Lambda = \{x\in \Z^n: Ax=0\}$ for some $m\times n$ matrix $A$. \nl %%double check your dimensions here, I htink $n$ is right from checking. 
+\indent \textit{Processing data}\nl 
+When processing the data, we wish to accept two forms of data of the problem. The first form is a lattice basis form and the second is a matrix form. The lattice basis or matrix form comes in two flavors; a integral (rational) form and a mixed integer case. \nl 
+\indent \textit{Case 1a:} The lattice is specified by a collection of $N$ rational vectors $B= \{b_1,...,b_N\}$ in the lattice with the possibility of $N\geq m$. One can compute the Hermite Normal Form of $B =(b_1,...,b_N)$ to give a basis of the lattice.\nl
+\indent \textit{Case 1b:} The lattice is specified by a collection of $N$ vectors $B= \{b_1,...,b_N\}$ in the lattice with the possibility of $N\geq m$. {\color{red} We will show that this is a special case of case 2.}\nl 
+%One can compute the Hermite Normal of the matrix $B =(b_1,...,b_N)$ to give a basis of the lattice as in Theorem \ref{LatticeBasis}. \nl 
+\indent \textit{Case 2:} The lattice is specified by as the integer kernel from a linear system of equations i.e. $\Lambda = \{x\in \Z^n: Ax=0\}$ for some $m\times n$ matrix $A$.% {\color{red} Here I'm not assuming that $A$ is integral, some more processing needs to be done with the data.} 
+Depending on the smallest subfield of $\R$ that the entereis in $A$ are, there are different approaches for finding a lattice basis here. \nl  %{\color{red} The columns of $A$ that are rational say $A' = (r_1,r_2,...,r_N)$ can be used in conjunction with  Theorem \ref{LatticeBasis} to compute a basis of $\Lambda$. }\nl 
+{\color{red} \indent \textit{Case 3:} The lattice is specified as integer kernel of the affine hull of a polytope. Since the affine hull of a polytope is given by it's equations being 0, we can reduce this case to case 2. }\nl 
+
+Now we can assume we have a basis $B= \{b_1,...,b_k\}$ of the rational space $L = \text{span}_\R(\Lambda)$ with $\Lambda = \La(B)$. \nl 
+\textbf{Step 2.} Complete a basis of $V$. That is find a basis of $M\cong V/L$ say $b_{k+1},..., b_{m}$ with the vectors having user specified properties. The user can chose the basis to be arbitrary, orthogonal, orthonormal to with respect to each other, $L$, or $\Lambda$ as appropriate.  % , the projected lattice. {\color{red} does this need to be the projected lattice?, no inherently the lattice does not need to be full ran}{\color{blue}, $b_{k+1},..., b_{m}$ such that these vectors are arbitrary/orthogonal/orthonormal to $\Lambda$. 
+\nl 
+\textbf{Step 3.} Define the map $T$ as $T = (b_1,...,b_k,b_{k+1},...b_m)$. Return this as a matrix.  \nl 
+
+
+
+
+\section{Computing Cases 1b/2/3 in step 1}
+\subsection{Compuitng $\ker_\Z(A)$ for $A$ with rational enteries}
+%In this section, we give some tools for computing lattice basis.  %as would be necessary by Case 2 and 3. 
+\begin{defn}
+A unimodular matrix $U$ is a square matrix with integer entries and $\det(U)=\pm 1$. %(I.e $U\in GL_n(\Z)$) 
+\end{defn}
+An important form of integral linear transformations is the Hermite normal form. 
+\begin{defn}
+The Hermite normal form of a matrix $A\in\Z^{m\times n}$ is a matrix $H$ with a $m\times m$ lower triangular matrix $D$ with strictly positive entries such that $AU = H = (D~0)$ where $U$ is a $n\times n$ unimodular matrix.
+\end{defn}
+\begin{lem}
+If $A$ is an integral $m\times n$ matrix and $U$ is a $n\times n$ unimodular matrix, then $\La(AU) = \La(A)$. 
+\end{lem}
+{\color{blue}Polish --  
+\begin{proof}
+ Since $Ux = w$ where $w\in \Z^n$ and that $U$ is unimodular, we know that $U^{-1}$ is also unimodular, so $x = U^{-1}w$. By this fact $\La(A) = \{Ax :x\in \Z^n\} = \{AU U^{-1}w : U^{-1}w\in \Z^n \} =\{AU x : x\in \Z^n \} =\La(AU)$. 
+ \end{proof}}
+\begin{prop}
+\begin{itemize}
+    \item Interchanging columns, adding column two columns $i$ and $j$, or multiplying a column by $-1$ can be expressed by multiplication of $A$ by unimodular matrix. 
+    \item The product of unimodular matrices is a unimodular. 
+\end{itemize}
+\end{prop}
+The proof could be left as an exercise or by reference. The interesting part is being able write down the column operations. These are simply done by modifying the identity matrix and using the properties of determinants to show that the determinate is as needed. 
+\begin{thm}\label{HNF}
+If $A$ is an $m\times n$ integer matrix with rank $A$ being $m$, then $A$ has a Hermite normal form and $D^{-1}A$ is an integer matrix. 
+\end{thm}
+\begin{proof}
+\textit{Sketch.}
+We describe an algorithm to compute the Hermite normal form of $A$. {\color{blue} Figure out how you like to write this proof and complete it.} 
+\end{proof}
+{\color{red} When $A$ has rank $k<m$, the idea is to reduce the problem to the full rank case. This can be done by defining a projection operator which is one to one on the restriction and has an easy to compute inverse. To do is to write this out properly and double check the details. }
+
+\begin{rem}
+There is polynomial time algorithm to compute the Hermite Normal form of matrix $A$ with integral entries. \cite{KoppeJesusBook} 
+\end{rem}
+\begin{thm}\label{LatticeBasis}
+Suppose that $A:\R^m\to \R^n$ is a linear transformation with integral entries, then the last $n-d$ columns of $U$ in the Hermite Normal form of $A$ generate $\ker_\Z (A) =\{ x\in \Z^n: Ax = 0\}$ where $d$ is the dimension of $\ker(A)$.  
+\end{thm}
+\begin{proof}
+
+ Suppose we have computed the Hermite normal form, that is $AU = H$. Let $u_i$ be one of the last $d$ columns of $U$, noting that the entries of $u_i$ are integral. Then $Au_i = 0$ by this decomposition and so $u_i\in \ker_{\Z}(A)$. Let $y = U^{-1}z$ with $z\in \ker_{\Z}(A)$, we have that $AUy = AUU^{-1}z = Az = \vec{0} = (D~0)y$. So we have that $D^{-1}AUy = (I~0)y =\vec{0}$. This implies that $y = \sum\limits_{i=d+1}^n y_ie_i$ where $e_i$ is a standard basis vector. Thus $U^{-1}z =\sum\limits_{i=d+1}^n y_ie_i  $ implies $z  =\sum\limits_{i=d+1}^n y_iUe_i =\sum\limits_{i=d+1}^n y_iu_i   $ hence the last $d$ columns of $U$ form a basis of $\ker_{\Z^m}(A). $ 
+
+\end{proof}
+
+
+
+\begin{prop}
+Let $A:\R^m \to \R^n$ be an integral linear transformation. $\ker_\Z(A) \cap \Lambda$ can be computed by computing the Hermitian Normal form of the dual of $\ker_\Z(A) \cap \Lambda$.
+\end{prop}
+\begin{proof}
+We can commute the dual basis of $\ker_Z(A)$ and $\Lambda$. Let $B$ be the lattice basis of $\ker_\Z(A)$ and $B'$ be the lattice basis of $\Lambda$ with dual basis $C$ and $C'$ respectively.   The lattices of $\La(B)$ and $\La(B')$, then the dual of $\La(B)\cap \La(B')$ is $\La([C|C'])$. This can be checked by a similar argument to Theorem \ref{DualLattice}. Then basis for $\La(B)\cap \La(B')$ can be computed via Theorem \ref{LatticeBasis} using the matrix $[C|C']$ and taking the dual of that. 
+\end{proof}
+
+%Given the possibility of mixed input with respect to Step 1, case 2 with columns being irrational with respect to the lattice $\{x\in \Z^n:Ax=0\}$ we need to know how to identify the columns of $A$ that are rational with respect to the lattice. 
+
+\subsection{Computing $\ker_\Z(A)$ for $A$ with algebraic entries}
+% \begin{ex}
+% Let $A = \begin{bmatrix}1 & \sqrt{2}\end{bmatrix}\in \R^{1\times 2}$. Then $\ker_\Z(A)=\{0\}.$\end{ex}
+% \begin{proof}
+%  First, $\ker_\R(A) = span\{(-\sqrt{2},1)^T\}$. There is no $n\in \Z\setminus\{0\}$ such that $ n\sqrt{2}\in \Z$. % We seak to find a vector $y\in \Z^2$ such that $y^Tx =0$ for all $x\in \ker_\Z(A)$. As notation though out, $x = (x_1,x_2)^T$. 
+% Consider $y^Tx=0$ where $x\in \ker_\Z(A)$. Then $x = \begin{bmatrix} a_1\\a_2\end{bmatrix}+\begin{bmatrix}b_1\\b_2 \end{bmatrix}\sqrt{2} =\begin{bmatrix}a_1 & b_1 \\ a_2&b_2\end{bmatrix}\begin{bmatrix} 1\\ \sqrt{2}\end{bmatrix} $. $y = \begin{bmatrix} y_1\\ y_2\end{bmatrix} +\begin{bmatrix} 0\\ 0\end{bmatrix}\sqrt{2}$, we need $y^Tx = 0$, so $\begin{bmatrix} 1& \sqrt{2}\end{bmatrix} \begin{bmatrix}y_1&y_2\\0 & 0\end{bmatrix}\begin{bmatrix}a_1 & b_1 \\ a_2&b_2\end{bmatrix}\begin{bmatrix} 1\\ \sqrt{2}\end{bmatrix} $
+% \end{proof}
+\begin{ex}\label{DimDiff}
+Let $A = \begin{bmatrix}1+\sqrt{2} & 0 & 1+\sqrt{2} & \sqrt{3} \\ 0 & 1 & -1 &1\end{bmatrix}$. Then $\ker_\Z(A) = \left\{n\begin{pmatrix} 1\\ -1\\ 1\\ 0\end{pmatrix}: n\in \Z\right\}$. 
+\end{ex}
+\begin{proof}
+First, $\Q(\sqrt{2},\sqrt{3})\subset \R$ is a  4 dimensional $\Q$ vector space with basis elements $1,\sqrt{2},\sqrt{3},\sqrt{6}$. For any $x\in \Q(\sqrt{2},\sqrt{3})$, there are rational numbers $q_1,q_2,q_3,q_4$ such that $q_1+q_2\sqrt{2} +q_3\sqrt{3} +q_4\sqrt{6} = \begin{pmatrix}1& \sqrt{2} & \sqrt{3} & \sqrt{6} \end{pmatrix}\begin{pmatrix} q_1\\ q_2\\q_3\\q_4\end{pmatrix}$.  Let $\vec{\alpha} = \begin{pmatrix}1& \sqrt{2} & \sqrt{3} & \sqrt{6} \end{pmatrix}$. Then $Ax = 0$ with $x\in \Q^4$, gives two equations $(1+\sqrt{2}) x_1 + 0 x_2 + (1+\sqrt{2}) x_3 + \sqrt{3}x_4 = 0$ and  $0x_1 + 1 x_2 + - x_3 + 1x_4 = 0$. The first equation in $\Q(\sqrt{2},\sqrt{3})$ is \begin{align}
+    (1+\sqrt{2}) x_1 + 0 x_2 + (1+\sqrt{2}) x_3 + \sqrt{3}x_4 &= 0\\ 
+     \begin{pmatrix}1\\1\\0\\0\end{pmatrix} x_1 +\begin{pmatrix}0\\1\\0\\0\end{pmatrix} x_2+  \begin{pmatrix}1\\-1\\0\\0\end{pmatrix} x_3+  \begin{pmatrix}0\\1\\1\\0\end{pmatrix} x_4& =\begin{pmatrix}0\\0\\0\\0\end{pmatrix} \\ 
+    \begin{pmatrix}1&0&1&0\\1&1&-1&1\\0&0&1&0\\0&0&0&0\end{pmatrix} x =\begin{pmatrix}0\\0\\0\\0\end{pmatrix} . 
+\end{align} A similar matrix equation holds for the other equation seeing that \begin{equation}\begin{pmatrix}0&1&-1&1\\0&0&0&0\\1&0&0&0\\0&0&0&0\end{pmatrix} x =\begin{pmatrix}0\\0\\0\\0\end{pmatrix}. \end{equation} As the $x$ vector is the same in both cases we can write this as a single matrix equation \begin{equation}\label{Ex2}
+    \begin{pmatrix}1&0&1&0\\1&1&-1&1\\0&0&1&0\\0&0&0&0\\0&1&-1&1\\0&0&0&0\\0&0&0&0\\0&0&0&0\end{pmatrix} x=\begin{pmatrix}0\\0\\0\\0\\0\\0\\0\\0\end{pmatrix}. 
+\end{equation} %we have that %Then $A\in \R^{2\times 4}$ is
+So solving $Ax=0$ for $x\in \Q^4$ is equivalent to solving the equation in line (\ref{Ex2}). This can be done with any method to solve matrix equations over a field. Take for instance Gram-Schmidt or LU-Factorization. Solving this matrix equation, we conclude that $x\in \text{span}\left\{\begin{pmatrix} 1\\ -1\\ 1\\ 0\end{pmatrix}\right\} $ in $\Q^4$. Picking $x$ such that $x\in \Z^4$, we arrive at the desired conclusion. 
+\end{proof}
+\begin{thm}\label{AlgebraicEnteries}
+Suppose that $A$ is an $m\times n$ matrix each entry being algebraic over $\Q$. \textcolor{blue}{Then $\ker_\Z(A)$ can be computed by an equivalent rational matrix problem. }
+\end{thm}%Adding definitions might solve this, as more uses are found it should sort itself out.
+\begin{proof} %avoid \vec notation, danger, assoicated with lower div math. 
+We have that $\{x\in \Z^n : Ax = 0\} \subset \{x\in \Q^n : Ax =0\}$. There is an $a\in \Z$ such that for any  $x\in \Q^n$, $ax \in \Z^n$. Therefore if $x\in \Q^n$ and $Ax =0$, then $ax\in Z^n$ and $A(ax) = 0$. So computing $\ker_\Q(A)$ gives $\ker_\Z(A)$ too. 
+
+Next, all the entries $a_{ij}$ of $A$ are algebraic over $\Q$, there is a polynomial such that $p(x)$ such that $p(\alpha_{ij}) \in \Q$. Let $m(x)$ be the minimal polynomial such that if $\alpha$ is a root of $p(x)$ then $\alpha$ is a root of $m(x)$. Then let $\Q(\alpha)$ be the splitting field of $m(x)$. This is a field extension of $\Q$ of degree $d$ where $d$ is the degree $m(x)$. Such a field extension of $\Q$ is a $d$ dimensional $\Q$ vector space with basis  $\vec{\alpha}^T = (1,\alpha_1,...,\alpha_{d-1})$ where $\alpha_i$ are the distinct roots of $m(x)$. Then for $y\in \Q(\alpha)$, we have $y =\vec{\alpha}^T \begin{pmatrix}
+y_1\\ y_2\\ \vdots \\ y_d 
+\end{pmatrix} = \vec{\alpha}^T \vec{y}$. In particular for entries $a_{ij} $ in $A$, we can express the entry as  $a_{ij}=\vec{\alpha}^T \vec{a_{ij}} $
+
+Now computing $Ax =0$ for $x\in \Q^n$. For $1\leq i\leq m$, $Ax=0$ implies \begin{equation}
+    \sum_{j=1}^m a_{ij} x_i = \sum_{j=1}^m \vec{\alpha}^T \vec{a_{ij}} x_i  = \vec{\alpha}^T\sum_{j=1}^m  \vec{a_{ij}} x_i  =\vec{\alpha}^T \vec{0}.
+\end{equation} We can use left cancellation and then solve the equivalent problem $ \sum_{j=1}^m \vec{a_{ij}} x_i = \begin{bmatrix} \vec{a_{i1}} & \vec{y_{i2}} & \cdots & \vec{a_{in}} \end{bmatrix} x=  \vec{0}$.  Let $\vec{A}$ be the matrix with entry $ij$ being $\vec{a_{ij}}$. Then solving   $\vec{A} x  =  \begin{pmatrix}\vec{0} \\ \vdots \\ \vec{0}
+\end{pmatrix}$ with $x\in \Q^n$ gives a solution to the original problem of $Ax = 0$ with $x\in\Z^n$. The problem  $\hat A x = 0$ can be solved by any number of matrix solving algorithms. Therefore finding $\ker_\Q(\vec{A})$ gives $\ker_\Z(A).$
+
+
+
+%that $m(a_{ij}) \in \Q$ for all entries $a_{ij}$ of $A.$ There is an algebraic extension of $\Q$ with degree $d$ such that all elements of $A$ are contained in this extension. This can be found by   Let $\Q(\alpha)$ be such extension. It has basis elements $1,\alpha_1,\alpha_2,..., \alpha_d$
+\end{proof}
+\textcolor{blue}{From 11.10.2022, I will worry about making the statement of Theorem \ref{AlgebraicEnteries} precise later.}
+
+
+\subsection{Non-algebraic, Non-rational Data}
+\textcolor{blue}{TBD}
+\section{Structure of $\ker_\Z(A)$ with real data}
+\subsection{Dense Directions}
+In the case where the data is rational, $dim(\ker_Z(A)) = dim(\ker_\R(A))$. Notice in Example \ref{DimDiff} that $dim(\ker_\R(A))=2$ but $dim(\ker_\Z(A))=1$. What causes this difference in dimension? 
+
+\section{Background}
+\subsection{Lattice Basis/Dual Spaces}
+\begin{defn} \cite{coursenotes}
+ The dual of a lattice of $\Lambda$ is the set $\tilde \Lambda = \{x: xy^T \in \Z, x\in \text{span}(\Lambda), y\in \Lambda \}$.
+\end{defn}
+\begin{thm}\label{DualLattice}
+The dual of a lattice $\Lambda = \mathcal{L}(B)$ with basis $B$ is a lattice with basis $D = B(B^TB)^{-1}$. 
+\end{thm}
+\begin{proof}
+Let $B= (b_1,b_2,...,b_n)$. By assumption, the columns of $B$ are linearly independent. Therefore the rows of $B^T$ are linearly independent. Looking at $B^TB$, its columns must be linearly independent because the rows of $B^T$ and columns of $B$ are linearly independent. 
+{\color{red} Should I say more/ be more explicit?} 
+Now we show that $\text{span}(D) = \text{span}(B)$. If $y\in \text{span}(D)$, then there is a $x$ such that $Dx =y$. Then $B(B^TB)^{-1}x = y$ and $y\in \text{span}(D)$. On the other hand if $y\in \text{span}(B)$, then there is an $x$ such that $Bx = y$ and then $D(B^TB)x = Bx = y$ hence $y\in \text{span}(D)$. 
+Notice that $B^T D = B^T B(B^TB)^{-1} = I$. For any $\tilde{x} = Bx \in \Lambda $ and $ Dy \in \La(D) $, $(Dy)^T(Bx) = y^Tx \in \Z$ because both $y,x \in \Z^n$, and the calculation $Dy^T = y^TD^TBx = y^T(B^TD)^Tx = y^T I x = y^Tx$. This implies that $\La(D)$ is contained in the dual of $\Lambda$. Let $v$ be the dual of $\Lambda$ with $B^Tv\in \Z^k$ and $v\in \text{span}_\R(B)$. (This exists by checking the definition of dual, this is what these next steps justify the other containment.) Therefore $v = Bw$ for some $w\in \R^n$ and $D(B^Tv) \in L(D)$ remembering that $B^Tv \in \Z^k$. Notice that $DB^Tv =DB^TBw = Bw = v $ which must be in $L(D)$. This shows that $\La(D)$ is the dual of $\Lambda$.
+\end{proof}
+\begin{prop}
+If $\Lambda = \La(B)$, then $\tilde{\tilde{\Lambda}} = \Lambda$. 
+\end{prop}
+\begin{proof}
+We can see that the basis are the same by a quick computation. $\tilde{\Lambda} = \La(D) = \La(B(B^TB)^{-1})$ and $\tilde{\tilde{\Lambda}} = \La( D(D^TD)^{-1}) = \La(B)$ because $D(D^TD)^{-1} = B(B^TB)^{-1} ((B(B^TB)^{-1})^TB(B^TB)^{-1})^{-1} =B(B^TB)^{-1} (((B^TB)^{-1})^T(B^TB)(B^TB)^{-1})^{-1}= B(B^TB)^{-1} (((B^TB)^{-1})^T)^{-1} = B.$
+{\color{red} I feel like this could be omitted.}
+\end{proof}
+
+
+% In the context of $\Z$ modules,  a lattice is an $\Z$ module. The algebraic dual of a $\Z$ module $M$ is the space of all linear functional (module homomoprhisms) $\phi: M \to \Z$. 
+\subsection{$\Z$-modules and Linear Algebra}
+\subsection{Commutative Algebra and Field Extensions of $\Q$}
+\subsection{Number Theory}
+\subsection{Topology}
+\subsection{Analysis}
+%That is $y^T$ is in the dual lattice (dual space is wrong, but maybe this isn't a lattice  exaclty as per out discussion on 9/30). We can use an equivlant formulation of $\ker_\Z(A)$ to enforce integrality constraints on $A$ by defining $\hat A = \begin{bmatrix} A\\ I_2\end{bmatrix}$. It happens that $x\in \ker_\Z(A)$ if and only if $\hat A x =  \begin{bmatrix} 0\\ x_1\\x_2\end{bmatrix}$. We can rewrite dual problem as at $z\in\Z^3$ such that $z^T \hat A x\in \Z$. If we can find $z^T$ such that $ z^T\hat A \neq 0$ and $z^T\hat A x=0$ for all $x\in \ker_\Z(A)$, we will have found a dense direction (I think).\nl 
+
+
+% We will work  in $\Q(\sqrt{2})$ viewing it as a 2 dimensional $\Q$ vector space, i.e. $a+b\sqrt{2} = \begin{pmatrix}a&b\end{pmatrix} \begin{pmatrix}1\\ \sqrt{2}\end{pmatrix}$. Computing the kernel of $\hat A$ in $\Q(\sqrt{2})$ over $\Q$, we have $\hat A x = \begin{bmatrix}1 &0 &0&1\\ 1 & 0 & 0&0 \\ 0 &0&1&0\end{bmatrix}\begin{bmatrix}a_1\\b_1\\a_2\\b_2\end{bmatrix}$ where $a_1+b_1\sqrt{2}= x_1$ and $a_2+b_2\sqrt{2}= x_2$. We find that  $a_1 = -b_2$, $a_1=0 =a_2$ and $b_2$ is a free variables (and ratiaonal). Because  $x$ is integaral, $b_1=0$.  so the kernel is spanned by $\begin{bmatrix}-\lambda \\ b_1 \\ a_2\\ \lambda \end{bmatrix}$ where $\lambda$ is some scalar. Computing $z^T\hat Ax$, $\begin{pmatrix}z_1+z_2 &0 & z_3 &z_1\\ 0 &0 &0&0\end{pmatrix}\begin{bmatrix}-\lambda \\ b_1 \\ a_2\\ \lambda \end{bmatrix} $
+
+
+ %Writing $z^T$ in the $\Q$ vector space, $z_1 = z_1 + 0 \sqrt{2}$ ect, $z^T = \begin{bmatrix}z_1 &z_2&z_3\\ 0&0&0 \end{bmatrix}$
+%\section{Number Theory}
+
+\end{document}
