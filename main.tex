@@ -233,26 +233,104 @@ Suppose that $A$ is an $m\times n$ matrix each entry being algebraic over $\Q$. 
 \begin{proof} 
 We have that $\{x\in \Z^n : Ax = 0\} \subset \{x\in \Q^n : Ax =0\}$. There is an $a\in \Z$ such that for any  $x\in \Q^n$, $ax \in \Z^n$. Therefore if $x\in \Q^n$ and $Ax =0$, then $ax\in Z^n$ and $A(ax) = 0$. So computing $\ker_\Q(A)$ gives $\ker_\Z(A)$ too. 
 
-Next, all the entries $a_{ij}$ of $A$ are algebraic over $\Q$, there is a polynomial such that $p(x)$ such that $p(\alpha_{ij}) \in \Q$. Let $m(x)$ be the minimal polynomial such that if $\alpha$ is a root of $p(x)$ then $\alpha$ is a root of $m(x)$. Then let $\Q(\alpha)$ be the splitting field of $m(x)$. This is a field extension of $\Q$ of degree $d$ where $d$ is the degree $m(x)$. Such a field extension of $\Q$ is a $d$ dimensional $\Q$ vector space with basis  $\vec{\alpha}^T = (1,\alpha_1,...,\alpha_{d-1})$ where $\alpha_i$ are the distinct roots of $m(x)$. Then for $y\in \Q(\alpha)$, we have $y =\vec{\alpha}^T \begin{pmatrix}
+Next, all the entries $a_{ij}$ of $A$ are algebraic over $\Q$, there is a polynomial such that $p(x)$ such that $p(\alpha_{ij}) \in \Q$. Let $m(x)$ be the minimal polynomial such that if $\alpha$ is a root of $p(x)$ then $\alpha$ is a root of $m(x)$. Then let $\Q(\alpha)$ be the splitting field of $m(x)$. This is a field extension of $\Q$ of degree $d$ where $d$ is the degree $m(x)$. Such a field extension of $\Q$ is a $d$ dimensional $\Q$ vector space with basis $1,\alpha_1,\dots,\alpha_{d-1}$ letting $\vec{\alpha}^T = (1,\alpha_1,...,\alpha_{d-1})$ where $\alpha_i$ are the distinct roots of $m(x)$. Then for $y\in \Q(\alpha)$, we have $y =\vec{\alpha}^T \begin{pmatrix}
 y_1\\ y_2\\ \vdots \\ y_d 
 \end{pmatrix} = \vec{\alpha}^T \vec{y}$. In particular for entries $a_{ij} $ in $A$, we can express the entry as  $a_{ij}=\vec{\alpha}^T \vec{a_{ij}} $
 
 Now computing $Ax =0$ for $x\in \Q^n$. For $1\leq i\leq m$, $Ax=0$ implies \begin{equation}
     \sum_{j=1}^m a_{ij} x_i = \sum_{j=1}^m \vec{\alpha}^T \vec{a_{ij}} x_i  = \vec{\alpha}^T\sum_{j=1}^m  \vec{a_{ij}} x_i  =\vec{\alpha}^T \vec{0}.
-\end{equation} We can use left cancellation and then solve the equivalent problem $ \sum_{j=1}^m \vec{a_{ij}} x_i = \begin{bmatrix} \vec{a_{i1}} & \vec{y_{i2}} & \cdots & \vec{a_{in}} \end{bmatrix} x=  \vec{0}$.  Let $\vec{A}$ be the matrix with entry $ij$ being $\vec{a_{ij}}$. Then solving   $\vec{A} x  =  \begin{pmatrix}\vec{0} \\ \vdots \\ \vec{0}
-\end{pmatrix}$ with $x\in \Q^n$ gives a solution to the original problem of $Ax = 0$ with $x\in\Z^n$. The problem  $\hat A x = 0$ can be solved by any number of matrix solving algorithms. Therefore finding $\ker_\Q(\vec{A})$ gives $\ker_\Z(A).$
+\end{equation} We can use left cancellation and then solve the equivalent problem \begin{equation}
+     \sum_{j=1}^m \vec{a_{ij}} x_i = \begin{bmatrix} \vec{a_{i1}} & \vec{a_{i2}} & \cdots & \vec{a_{in}} \end{bmatrix} x=  \vec{0}.
+\end{equation}  Let $\vec{A}$ be the matrix with entry $ij$ being $\vec{a_{ij}}$. Then solving   $\vec{A} x  =  \begin{pmatrix}\vec{0} \\ \vdots \\ \vec{0}
+\end{pmatrix}$ with $x\in \Q^n$ gives a solution to the original problem of $Ax = 0$ with $x\in\Z^n$. The problem  $\vec A x = 0$ can be solved by any number of matrix solving algorithms. Therefore finding $\ker_\Q(\vec{A})$ gives $\ker_\Z(A).$
 
 
 \end{proof}
 \textcolor{blue}{From 11.10.2022, I will worry about making the statement of Theorem \ref{AlgebraicEnteries} precise later.}
 
 
-\subsection{Non-algebraic, Non-rational Data}
+\subsection{Aribtary Real Data}
 \textcolor{blue}{TBD}
+\begin{conj}
+    Let $A$ be a real $m\times n$ matrix. If $\ker_\Z(A)$  is non-trivial, then $\ker_\Z(A)$ can be deterimed in finite time. 
+\end{conj}
+%if you had enough time 
 \section{Structure of $\ker_\Z(A)$ with real data}
-\subsection{Dense Directions}
-In the case where the data is rational, $dim(\ker_Z(A)) = dim(\ker_\R(A))$. Notice in Example \ref{DimDiff} that $dim(\ker_\R(A))=2$ but $dim(\ker_\Z(A))=1$. What causes this difference in dimension? 
+\subsection{Lattices of Full Rank}
 
+% \begin{prop}
+% If $A$ has rational entries, then $\ker_\Z(A)$ is a full rank lattice.
+% \end{prop}
+% \begin{proof}
+% This follows from computing the Hermite Normal form of $A$. This immediately gives that $dim(\ker_\Z(A)) = n-m = dim(\ker_\R(A))$. 
+% \end{proof}
+
+%\begin{thm}
+%$\Lambda$ is a full rank lattice if and only if $\tilde \Lambda$ is a full rank lattice. 
+%\end{thm}
+%This should follows from Theorem 4.2 and prop 4.3. 
+\subsection{Difference in dimension}
+In the case where the data is rational, $dim(\ker_\Z(A)) = dim(\ker_\R(A))$. Notice in Example \ref{DimDiff} that $dim(\ker_\R(A))=2$ but $dim(\ker_\Z(A))=1$. What causes this difference in dimension?  The answer lies in the dual of the $\ker_\Z(A)$ as a $\Z$-module. 
+\begin{defn}
+The \textcolor{red}{ dual of a lattice $\Lambda$ as a $\Z$-module} is the set $\Lambda^\vee = \{ z: z^Tx \in \Z ,\forall x \in \Lambda\} $. \textcolor{red}{I haven't checked the details on this thoroughly, i.e. revisited textbooks ect} %Should this be the correct language here? I think so because this should be the space of linear functionals on $\Lambda$ which preserve the $\Z$-module property. I have not double checked defintions
+\end{defn}
+%Here the span of the basis vectors lie in $\R^n$. It is possible that there is a sequence $(y_n)\subseteq \tilde \Lambda$ that converges in the Eulcidan metric in $\R^n$. If such a sequence exists, then $\tilde \Lambda$ would not be a lattice because $(y_n)\to y$ and $y$ would not be an isolated point.  Furthermore, $(y_n)^Tx \in\Z $
+%for all $ x\in \Lambda$ so $y^Tx \in \Z$ (strongly convergence implies weak convergence). We would $y \in \tilde{\Lambda}$. There is a trick that we can use in terms of formulating the problem to help insure that $y\in \tilde \Lambda$ which we will see in the form of an example.  %This means that $y\in \tilde{\Lambda}$ as $y \in span_\Z(\Lambda)$ by convergence. % \begin{thm}
+% A lattice $\Lambda$ is full rank if and only if $\tilde \Lambda$ is full rank. 
+% \end{thm}
+% \begin{proof}
+% ($\implies$) Suppose that $\Lamdda$ is a full rank lattice. 
+% \end{proof}
+
+
+
+% In Example \ref{DimDiff}, $\Lambda= \ker_\Z(A)$ is not a full rank lattice as since $dim(\ker_\Z(A)) < dim(\ker_\R(A))$. In the dual of $\Lambda$ as a $\Z$ module, there is a point which is not isolated meaning that the  the rowspan of $A$ is dense in some subspace of $\R^4$. This density means that the topological properties of a lattice are no longer satisfied. In the following example, we shall explicit show the violation that in the lattice dual, there is a subspace that is dense in $\R^4$ 
+
+\begin{ex}
+Let $A = \begin{bmatrix}1+\sqrt{2} & 0 & 1+\sqrt{2} & \sqrt{3} \\ 0 & 1 & -1 &1\end{bmatrix}$. Define $\hat A = \begin{pmatrix}
+A \\ I_4
+ \end{pmatrix}$. We claim that $ \ker_\Z(A)^\vee$ is not a lattice. %\begin{itemize}
+\end{ex}
+\begin{proof}
+
+We will find a infinite sequence $(z^{(n)})_{n=1}^\infty$ with $z^{(n)}\in \Z^6$ such that $z^{(n)}\hat A$ converges with respect to the Euclidean norm and $z^{(n)}$ is distinct form $z^{(m)}$ provided $m\neq n$. This will imply that $\lim_{n\to \infty} \hat A^T z^{(n)} = y \in rowspan_\R(A)$. By adding the guarantee that $z^{(n)}\hat A^Tx =0$ for all $x\in \ker_\Z(A)$, this guarantees that $y^Tx=0$, so $y\in \ker_\Z(A)^\vee$. Finding such a $y$ gives that $y$ is not isolated in the $rowspan_\R(A)$ meaning that $ \ker_\Z(A)^\vee$ cannot be a lattice.  
+We start by computing $\hat A^Tz$ for $z\in \Z^6$,
+\begin{align}
+    \begin{bmatrix}
+    1+\sqrt{2} &0 & 1& 0 &0&0 \\ 
+    0 &1 & 0& 1 &0&0 \\
+    1+\sqrt{2} &-1 & 0& 0 &1&0 \\
+    \sqrt{3} &1 & 0& 0 &0&1 
+    \end{bmatrix}\begin{pmatrix}
+    z_1\\z_2\\z_3\\z_4\\z_5\\z_6
+    \end{pmatrix}&= \begin{pmatrix}
+    (1+\sqrt{2})z_1 +z_3 \\ 
+    z_2 +z_4\\
+     (1+\sqrt{2})z_1 -z_2+z_5 \\
+          \sqrt{3}z_1 +z_2+z_6
+    \end{pmatrix}=y.
+\end{align}
+Consider the sequences of convergents of the partial fraction decomposition of $1+\sqrt{2}$. Define these as $\{\frac{p_n}{q_n}\}_{n=1}^\infty$. Because this is a sequence of convertenets, it gives the bound $|(1+\sqrt{2})q_n - p_n|< \frac{1}{q_n}$. 
+We can pick a sequence of integers $r_n$ such that $|\sqrt{3}q_n -r_n|<1$. Now  define $z^{(n)} = \begin{pmatrix}
+q_n & 1& -p_n & 1 & -p_n+1 & -r_n-1 
+\end{pmatrix}^T.$ 
+
+
+ Computing the norm, $$||\hat A^T z^{(n)}||^2 = ||(z^{(n)})^T\hat A||^2 = ((1+\sqrt{2})q_n - p_n)^2 + (1-1)^2 +(1+\sqrt{2})q_n - 1- p_n+1)^2 + (\sqrt{3}q_n +1-r_n-1)^2< 2q_n^{-2}+1.$$  Thus the sequence of norms is bounded above by $3$ because $|q_n|\geq 1$. We also know that because $1+\sqrt{2}$ and $\sqrt{3}$ are irrational,  $0<|(1+\sqrt{2})q_n - p_n|$ and $0<|\sqrt{3}q_n -r_n| $. So $0<||A^Tz^{(n)}||^2 < 2q_n^{-2}+1\leq 3$ is a bounded sequence. Because of this boundedness, there is a convergent subsequence of $A^Tz^(n)$ say $A^Tz^{(n)_k}=y_k \to y$. 
+
+Notice since $\ker_\Z(A) = \{ n\begin{pmatrix}
+1 & -1 &1 &0
+\end{pmatrix}^T:n\in \Z\}$ that $y_k^Tx =0$ by our choice of $z^{(n)}$. Because $rowspan_\R(A)$ is a closed set with respect to the educlidan norm, $y\in rowspan_\R(A)$ and too $y^Tx =0$. Lastly, we note by choosing a sequence of convergents it follows that $|(1+\sqrt{2})q_n +p_n|>|(1+\sqrt{2})q_{n+1} +p_{n+1}|$ for all $n$. This ensures that the sequence $y_k$ consists of distinct elements. 
+Now for any $\epsilon>0$, the open ball of radius $\epsilon$ about $y$ $B_\epsilon(y)$ has an infinitely distinct points in $\ker_\Z(A)^\vee$. This means that $y$ is not isolated and hence $\ker_\Z(A)^\vee$ is not a lattice. 
+\end{proof}
+
+\begin{conj}\label{AlgebraicChar} Suppose that $A$ is an $m\times n$ matrix with algebraic entries.  Let $\Lambda = \ker_\Z(A)$\begin{enumerate}
+    \item If $dim(\Lambda) < n-m$, then $\Lambda^\vee $ is not a lattice. 
+    \item \textcolor{blue}{There is a submodule (a $\Z$-module) $V$ of $\Lambda^\vee$ such that $dim(V) = dim(\Lambda)$ and $V$ is a integer lattice. } \textcolor{red}{this is the submodule of $\Lambda^\vee$ which behaves like the ``lattice'' dual we intuitively want when we have a lattice I think. That is what I'm trying to describe here.}
+\end{enumerate}
+\end{conj}
+
+\subsection{Aribarty Real Data}
 \section{Background}
 \subsection{Lattice Basis/Dual Spaces}
 \begin{defn} \cite{coursenotes}
@@ -278,10 +356,31 @@ We can see that the basis are the same by a quick computation. $\tilde{\Lambda} 
 
 
 \subsection{$\Z$-modules and Linear Algebra}
+
 \subsection{Commutative Algebra and Field Extensions of $\Q$}
 \subsection{Number Theory}
+A fact used that that every irrational number has a unique continued fraction expansion.
+
+
+
+
 \subsection{Topology}
 \subsection{Analysis}
 
-
+\section{Tasks}
+\begin{itemize}
+    \item Review details and find references for dual module definition
+    \item Refine Conjecture \ref{AlgebraicChar}
+    \item Prove Conjecture \ref{AlgebraicChar}
+    \item Verify details of conjectured algorithm to solve case 2 in general.
+    \item If above is true, write algorithm
+    \item Add appropriate background to make the writing self contained.
+    \item Write Personal Notes and Background on $\Z$-modules, Linear Algebra, Commutative Algebra, Field extensions of $\Q$/Galois Theory.
+    \item Finish Section on Lattice Theory
+    \item Write section on Number Theory, Diophantine Equation solving (the basics), continued Fractions, Pell Eqauations, 
+    \item Write Personal Notes on Analysis/Topology basis for the work with items about Fourier series, convergence, density, ect.
+    \item Read and understand proof of Subspace Theorem
+    \item Read and understand proof of Dirichlet's approximation theorem
+    \item Read more about number theoretic approximation
+\end{itemize}
 \end{document}
